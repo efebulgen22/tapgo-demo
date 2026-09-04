@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Ahmet Barber</title>
+    <title>TAPGO</title>
 
     <style>
         * {
@@ -16,7 +16,7 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
             background: #0b0b0b;
-            color: #ffffff;
+            color: white;
             min-height: 100vh;
         }
 
@@ -27,8 +27,6 @@
             min-height: 100vh;
             padding: 30px 18px 25px;
         }
-
-        /* ÜST BÖLÜM */
 
         .profile {
             text-align: center;
@@ -41,6 +39,7 @@
             height: 105px;
             border-radius: 50%;
             margin: auto;
+
             display: flex;
             align-items: center;
             justify-content: center;
@@ -49,20 +48,12 @@
             border: 2px solid #333;
 
             font-size: 45px;
-
-            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
         }
 
         .business-name {
             font-size: 28px;
             font-weight: 700;
             margin-top: 17px;
-        }
-
-        .verified {
-            color: #aaa;
-            font-size: 14px;
-            margin-left: 4px;
         }
 
         .category {
@@ -80,8 +71,6 @@
         .stars {
             color: #f5c542;
         }
-
-        /* BUTONLAR */
 
         .buttons {
             display: flex;
@@ -109,18 +98,11 @@
             font-weight: 600;
 
             transition: 0.2s ease;
-
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
         .button:hover {
             background: #222;
             transform: translateY(-2px);
-            border-color: #444;
-        }
-
-        .button:active {
-            transform: scale(0.98);
         }
 
         .icon {
@@ -134,20 +116,11 @@
             margin-right: 35px;
         }
 
-        /* ÖNE ÇIKAN BUTON */
-
         .appointment {
-            background: #ffffff;
+            background: white;
             color: #111;
-            border-color: #ffffff;
+            border-color: white;
         }
-
-        .appointment:hover {
-            background: #e9e9e9;
-            border-color: #e9e9e9;
-        }
-
-        /* BİLGİ KARTI */
 
         .info {
             margin-top: 25px;
@@ -169,10 +142,8 @@
         .info-text {
             color: #999;
             font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
-
-        /* ALT */
 
         .footer {
             text-align: center;
@@ -184,128 +155,305 @@
         .tapgo {
             color: #888;
             font-weight: bold;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .error {
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .error h1 {
+            margin-bottom: 10px;
+        }
+
+        .error p {
+            color: #888;
         }
     </style>
 </head>
 
 <body>
 
-<div class="page">
-
-    <!-- İŞLETME PROFİLİ -->
-
-    <div class="profile">
-
-        <div class="profile-image">
-            ✂️
-        </div>
-
-        <div class="business-name">
-            Ahmet Barber
-            <span class="verified">✓</span>
-        </div>
-
-        <div class="category">
-            Erkek Kuaförü • Ankara
-        </div>
-
-        <div class="rating">
-            <span class="stars">★★★★★</span>
-            4.9 • 127 değerlendirme
-        </div>
-
-    </div>
+<div class="page" id="app"></div>
 
 
-    <!-- BUTONLAR -->
+<script>
 
-    <div class="buttons">
+    /*
+    ==========================================
+             TAPGO MÜŞTERİ VERİLERİ
+    ==========================================
+    */
 
-        <a class="button appointment"
-           href="https://wa.me/905555555555"
-           target="_blank">
+    const customers = {
 
-            <div class="icon">💬</div>
+        ahmetbarber: {
 
-            <div class="button-text">
-                WhatsApp'tan Randevu
+            name: "Ahmet Barber",
+
+            category: "Erkek Kuaförü",
+
+            city: "Ankara / Altındağ",
+
+            logo: "✂️",
+
+            instagram:
+                "https://www.instagram.com/",
+
+            whatsapp:
+                "https://wa.me/905555555555",
+
+            maps:
+                "https://www.google.com/maps",
+
+            google:
+                "https://www.google.com/",
+
+            rating: "Demo",
+
+            reviews: "Demo",
+
+            hours:
+                "Pazartesi - Cumartesi<br>09:00 - 20:00"
+
+        },
+
+
+        efecoffee: {
+
+            name: "Efe Coffee",
+
+            category: "Kafe & Kahve",
+
+            city: "Ankara",
+
+            logo: "☕",
+
+            instagram:
+                "https://www.instagram.com/",
+
+            whatsapp:
+                "https://wa.me/905555555555",
+
+            maps:
+                "https://www.google.com/maps",
+
+            google:
+                "https://www.google.com/",
+
+            rating: "Demo",
+
+            reviews: "Demo",
+
+            hours:
+                "Her gün<br>08:00 - 23:00"
+
+        }
+
+    };
+
+
+    /*
+    ==========================================
+                 URL'DEN ID AL
+    ==========================================
+    */
+
+    const params =
+        new URLSearchParams(window.location.search);
+
+    const id =
+        params.get("id");
+
+
+    /*
+    ==========================================
+              MÜŞTERİYİ BUL
+    ==========================================
+    */
+
+    const customer =
+        customers[id];
+
+
+    /*
+    ==========================================
+                 SAYFAYI OLUŞTUR
+    ==========================================
+    */
+
+    const app =
+        document.getElementById("app");
+
+
+    if (!customer) {
+
+        app.innerHTML = `
+
+            <div class="error">
+
+                <h1>İşletme bulunamadı</h1>
+
+                <p>
+                    Geçersiz veya eksik TAPGO bağlantısı.
+                </p>
+
             </div>
 
-        </a>
+        `;
+
+    } else {
+
+        document.title =
+            customer.name + " | TAPGO";
 
 
-        <a class="button"
-           href="https://www.instagram.com/"
-           target="_blank">
+        app.innerHTML = `
 
-            <div class="icon">📸</div>
+            <div class="profile">
 
-            <div class="button-text">
-                Instagram
+                <div class="profile-image">
+
+                    ${customer.logo}
+
+                </div>
+
+
+                <div class="business-name">
+
+                    ${customer.name}
+
+                </div>
+
+
+                <div class="category">
+
+                    ${customer.category}
+                    •
+                    ${customer.city}
+
+                </div>
+
+
+                <div class="rating">
+
+                    ${customer.rating}
+
+                    ${customer.reviews !== "Demo"
+                        ? " • " + customer.reviews + " değerlendirme"
+                        : ""
+                    }
+
+                </div>
+
             </div>
 
-        </a>
+
+            <div class="buttons">
 
 
-        <a class="button"
-           href="https://www.google.com/maps"
-           target="_blank">
+                <a class="button appointment"
+                   href="${customer.whatsapp}"
+                   target="_blank">
 
-            <div class="icon">📍</div>
+                    <div class="icon">
+                        💬
+                    </div>
 
-            <div class="button-text">
-                Yol Tarifi
+                    <div class="button-text">
+                        WhatsApp'tan İletişim
+                    </div>
+
+                </a>
+
+
+                <a class="button"
+                   href="${customer.instagram}"
+                   target="_blank">
+
+                    <div class="icon">
+                        📸
+                    </div>
+
+                    <div class="button-text">
+                        Instagram
+                    </div>
+
+                </a>
+
+
+                <a class="button"
+                   href="${customer.maps}"
+                   target="_blank">
+
+                    <div class="icon">
+                        📍
+                    </div>
+
+                    <div class="button-text">
+                        Yol Tarifi
+                    </div>
+
+                </a>
+
+
+                <a class="button"
+                   href="${customer.google}"
+                   target="_blank">
+
+                    <div class="icon">
+                        ⭐
+                    </div>
+
+                    <div class="button-text">
+                        Google'da Değerlendir
+                    </div>
+
+                </a>
+
+
             </div>
 
-        </a>
+
+            <div class="info">
+
+                <div class="info-title">
+
+                    📍 İşletme Bilgileri
+
+                </div>
 
 
-        <a class="button"
-           href="https://www.google.com/"
-           target="_blank">
+                <div class="info-text">
 
-            <div class="icon">⭐</div>
+                    ${customer.city}
 
-            <div class="button-text">
-                Google'da Değerlendir
+                    <br>
+
+                    ${customer.hours}
+
+                </div>
+
             </div>
 
-        </a>
 
-    </div>
+            <div class="footer">
 
+                <div class="tapgo">
+                    TAPGO
+                </div>
 
-    <!-- İŞLETME BİLGİSİ -->
+                Dijital işletme kartı
 
-    <div class="info">
+            </div>
 
-        <div class="info-title">
-            📍 İşletme Bilgileri
-        </div>
+        `;
 
-        <div class="info-text">
-            Ankara / Altındağ<br>
-            Pazartesi - Cumartesi<br>
-            09:00 - 20:00
-        </div>
+    }
 
-    </div>
-
-
-    <!-- FOOTER -->
-
-    <div class="footer">
-
-        <div class="tapgo">
-            TAPGO
-        </div>
-
-        Dijital işletme kartı
-
-    </div>
-
-</div>
+</script>
 
 </body>
 </html>

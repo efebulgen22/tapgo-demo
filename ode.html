@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>TAPGO ÖDE</title>
+
+
+<style>
+
+* {
+
+  box-sizing: border-box;
+
+  margin: 0;
+
+  padding: 0;
+
+}
+
+
+body {
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  background: #0b0b0b;
+
+  color: white;
+
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+}
+
+
+.container {
+
+  width: 100%;
+
+  max-width: 430px;
+
+  min-height: 100vh;
+
+  padding: 30px 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+
+.logo {
+
+  text-align: center;
+
+  margin-top: 25px;
+
+  font-size: 30px;
+
+  font-weight: 800;
+
+  letter-spacing: 3px;
+
+  color: #d1b06b;
+
+}
+
+
+.subtitle {
+
+  text-align: center;
+
+  margin-top: 8px;
+
+  color: #777;
+
+  font-size: 13px;
+
+}
+
+
+.card {
+
+  margin-top: 45px;
+
+  padding: 25px 20px;
+
+  background: #121212;
+
+  border: 1px solid #272727;
+
+  border-radius: 20px;
+
+}
+
+
+.business {
+
+  text-align: center;
+
+  font-size: 24px;
+
+  font-weight: 700;
+
+}
+
+
+.payment-title {
+
+  text-align: center;
+
+  margin-top: 8px;
+
+  color: #999;
+
+  font-size: 14px;
+
+}
+
+
+.bank {
+
+  text-align: center;
+
+  margin-top: 30px;
+
+  color: #aaa;
+
+  font-size: 14px;
+
+}
+
+
+.iban {
+
+  margin-top: 10px;
+
+  padding: 18px;
+
+  background: #1b1b1b;
+
+  border: 1px solid #303030;
+
+  border-radius: 12px;
+
+  text-align: center;
+
+  font-size: 15px;
+
+  line-height: 1.5;
+
+  word-break: break-all;
+
+}
+
+
+.copy {
+
+  width: 100%;
+
+  margin-top: 15px;
+
+  padding: 17px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #d1b06b;
+
+  color: #080808;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+}
+
+
+.success {
+
+  display: none;
+
+  text-align: center;
+
+  margin-top: 15px;
+
+  color: #50d890;
+
+  font-size: 14px;
+
+}
+
+
+.instruction {
+
+  text-align: center;
+
+  margin-top: 22px;
+
+  color: #777;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+
+}
+
+
+.loading {
+
+  text-align: center;
+
+  margin-top: 120px;
+
+  color: #777;
+
+}
+
+
+.error {
+
+  text-align: center;
+
+  margin-top: 120px;
+
+  color: #ff5c5c;
+
+}
+
+
+footer {
+
+  margin-top: auto;
+
+  padding-top: 40px;
+
+  text-align: center;
+
+  color: #444;
+
+  font-size: 12px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+  <div class="logo">
+
+    TAPGO
+
+  </div>
+
+
+  <div class="subtitle">
+
+    Hızlı ve kolay ödeme
+
+  </div>
+
+
+  <div id="loading"
+       class="loading">
+
+    Ödeme bilgileri yükleniyor...
+
+  </div>
+
+
+  <div id="content"
+       style="display:none;">
+
+
+    <div class="card">
+
+
+      <div id="business"
+           class="business">
+
+        İşletme
+
+      </div>
+
+
+      <div class="payment-title">
+
+        Ödeme yapılacak hesap
+
+      </div>
+
+
+      <div id="bank"
+           class="bank">
+
+        -
+
+      </div>
+
+
+      <div id="iban"
+           class="iban">
+
+        -
+
+      </div>
+
+
+      <button id="copy"
+              class="copy">
+
+        📋 IBAN'I KOPYALA
+
+      </button>
+
+
+      <div id="success"
+           class="success">
+
+        ✓ IBAN kopyalandı
+
+      </div>
+
+
+      <div class="instruction">
+
+        IBAN'ı kopyaladıktan sonra
+        banka uygulamanızı açıp
+        transfer ekranına yapıştırabilirsiniz.
+
+      </div>
+
+
+    </div>
+
+
+    <footer>
+
+      TAPGO · Dijital Ödeme
+
+    </footer>
+
+
+  </div>
+
+
+  <div id="error"
+       class="error"
+       style="display:none;">
+
+    Ödeme bilgileri bulunamadı.
+
+  </div>
+
+
+</div>
+
+
+
+<script>
+
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzYoGK5hM6WtaydubGiyJPhblkoGWwiVS5tEBWCHcurhklNytcKtkH57Ml6A5z89rLO6w/exec";
+
+
+const params =
+new URLSearchParams(
+  window.location.search
+);
+
+
+const id =
+params.get("id");
+
+
+if (!id) {
+
+  document.getElementById(
+    "loading"
+  ).style.display = "none";
+
+
+  document.getElementById(
+    "error"
+  ).style.display = "block";
+
+}
+
+
+else {
+
+
+  fetch(
+    API_URL +
+    "?type=payment&id=" +
+    encodeURIComponent(id)
+  )
+
+
+  .then(
+    response => response.json()
+  )
+
+
+  .then(
+    data => {
+
+
+      document.getElementById(
+        "loading"
+      ).style.display = "none";
+
+
+      if (!data.success) {
+
+        document.getElementById(
+          "error"
+        ).style.display = "block";
+
+        return;
+
+      }
+
+
+      document.getElementById(
+        "content"
+      ).style.display = "block";
+
+
+      const payment =
+        data.payment;
+
+
+      document.getElementById(
+        "business"
+      ).textContent =
+        payment.name ||
+        "İşletme";
+
+
+      document.getElementById(
+        "bank"
+      ).textContent =
+        payment.bank ||
+        "";
+
+
+      document.getElementById(
+        "iban"
+      ).textContent =
+        payment.iban ||
+        "";
+
+
+      document.getElementById(
+        "copy"
+      ).addEventListener(
+        "click",
+        function() {
+
+
+          navigator.clipboard
+            .writeText(
+              payment.iban
+            )
+            .then(
+              () => {
+
+                document.getElementById(
+                  "success"
+                ).style.display =
+                  "block";
+
+
+                this.textContent =
+                  "✓ IBAN KOPYALANDI";
+
+
+                setTimeout(
+                  () => {
+
+                    this.textContent =
+                      "📋 IBAN'I KOPYALA";
+
+                  },
+                  2500
+                );
+
+              }
+            );
+
+
+        }
+      );
+
+
+    }
+
+  )
+
+
+  .catch(
+
+    error => {
+
+      console.error(error);
+
+
+      document.getElementById(
+        "loading"
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "error"
+      ).style.display =
+        "block";
+
+    }
+
+  );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,882 +1,643 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>TAPGO</title>
+
 
 <style>
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
 
 body {
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
 
-    background:
-        radial-gradient(
-            circle at top,
-            #202024 0%,
-            #0b0b0d 45%
-        );
+  font-family: Arial, Helvetica, sans-serif;
 
-    color: #ffffff;
-    min-height: 100vh;
+  background: #0b0b0b;
+
+  color: white;
+
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
 }
+
 
 .container {
-    width: 100%;
-    max-width: 440px;
-    margin: auto;
-    padding: 25px 16px 35px;
+
+  width: 100%;
+
+  max-width: 430px;
+
+  min-height: 100vh;
+
+  padding: 30px 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
 }
 
-/* ANA KART */
 
-.card {
-    background: rgba(21, 21, 24, 0.96);
+.profile {
 
-    border: 1px solid rgba(255,255,255,0.09);
+  text-align: center;
 
-    border-radius: 28px;
+  margin-top: 25px;
 
-    padding: 28px 20px 22px;
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,0.45);
-
-    backdrop-filter: blur(15px);
 }
 
-/* LOGO */
 
 .logo {
-    width: 92px;
-    height: 92px;
 
-    margin: 0 auto 18px;
+  width: 90px;
 
-    border-radius: 50%;
+  height: 90px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  border-radius: 50%;
 
-    background: #242428;
+  background: #171717;
 
-    border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid #292929;
 
-    overflow: hidden;
+  display: flex;
 
-    font-size: 42px;
+  align-items: center;
 
-    box-shadow:
-        0 8px 30px rgba(0,0,0,0.3);
+  justify-content: center;
+
+  margin: 0 auto 18px;
+
+  font-size: 40px;
+
+  overflow: hidden;
+
 }
+
 
 .logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
 }
 
-/* İŞLETME */
 
-.business-name {
-    text-align: center;
+.name {
 
-    font-size: 28px;
+  font-size: 28px;
 
-    font-weight: 750;
+  font-weight: 700;
 
-    letter-spacing: -0.5px;
-
-    margin-bottom: 7px;
 }
+
 
 .category {
-    text-align: center;
 
-    color: #b1b1b8;
+  margin-top: 7px;
 
-    font-size: 14px;
+  color: #999;
 
-    margin-bottom: 5px;
+  font-size: 15px;
+
 }
+
 
 .city {
-    text-align: center;
 
-    color: #77777f;
+  margin-top: 5px;
 
-    font-size: 13px;
+  color: #777;
 
-    margin-bottom: 24px;
+  font-size: 14px;
+
 }
 
-/* BUTONLAR */
 
 .buttons {
-    display: flex;
-    flex-direction: column;
 
-    gap: 11px;
+  margin-top: 35px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
 }
 
-.button {
-    width: 100%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.btn {
 
-    min-height: 54px;
+  width: 100%;
 
-    padding: 14px 16px;
+  padding: 17px;
 
-    border-radius: 15px;
+  border-radius: 14px;
 
-    text-decoration: none;
+  background: #171717;
 
-    color: white;
+  border: 1px solid #292929;
 
-    background: #202024;
+  color: white;
 
-    border: 1px solid #303037;
+  text-decoration: none;
 
-    font-size: 15px;
+  text-align: center;
 
-    font-weight: 650;
+  font-size: 16px;
 
-    transition:
-        transform 0.18s ease,
-        background 0.18s ease,
-        border-color 0.18s ease;
+  font-weight: 600;
+
 }
 
-.button:hover {
-    transform: translateY(-2px);
-
-    background: #29292f;
-
-    border-color: #414149;
-}
-
-.button:active {
-    transform: scale(0.98);
-}
-
-/* WHATSAPP */
 
 .whatsapp {
-    background: #16834f;
 
-    border-color: #1c9c60;
+  background: #18a957;
+
+  border-color: #18a957;
+
 }
 
-.whatsapp:hover {
-    background: #1b965b;
-
-    border-color: #25b875;
-}
-
-/* BUTON İKON */
-
-.icon {
-    margin-right: 9px;
-
-    font-size: 17px;
-}
-
-/* BİLGİLER */
 
 .info {
-    margin-top: 25px;
 
-    padding-top: 22px;
+  margin-top: 28px;
 
-    border-top:
-        1px solid rgba(255,255,255,0.08);
+  background: #111;
+
+  border: 1px solid #242424;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
 }
 
-.info-title {
-    font-size: 14px;
-
-    font-weight: 700;
-
-    margin-bottom: 13px;
-}
 
 .info-row {
-    display: flex;
 
-    align-items: flex-start;
+  padding: 16px;
 
-    justify-content: space-between;
+  border-bottom: 1px solid #222;
 
-    gap: 15px;
+  font-size: 14px;
 
-    padding: 9px 0;
+  color: #aaa;
 
-    color: #9999a1;
-
-    font-size: 13px;
 }
 
-.info-row strong {
-    color: #eeeeef;
 
-    font-weight: 500;
+.info-row:last-child {
 
-    text-align: right;
+  border-bottom: none;
 
-    line-height: 1.4;
 }
 
-/* FOOTER */
 
-.footer {
-    text-align: center;
+.info-title {
 
-    margin-top: 20px;
+  color: white;
 
-    color: #55555d;
+  font-weight: 600;
 
-    font-size: 10px;
+  margin-bottom: 5px;
 
-    letter-spacing: 2px;
 }
 
-.footer span {
-    color: #777780;
-}
-
-/* YÜKLENİYOR */
 
 .loading {
-    text-align: center;
 
-    padding: 70px 20px;
+  text-align: center;
 
-    color: #9999a1;
+  margin-top: 100px;
 
-    font-size: 14px;
+  color: #777;
+
 }
 
-/* HATA */
 
 .error {
-    text-align: center;
 
-    padding: 65px 25px;
+  text-align: center;
+
+  margin-top: 100px;
+
+  color: #ff5c5c;
+
 }
 
-.error-icon {
-    font-size: 40px;
 
-    margin-bottom: 18px;
-}
+footer {
 
-.error h2 {
-    font-size: 22px;
+  margin-top: auto;
 
-    margin-bottom: 10px;
-}
+  padding-top: 35px;
 
-.error p {
-    color: #8e8e96;
+  text-align: center;
 
-    font-size: 14px;
+  color: #555;
 
-    line-height: 1.6;
-}
-
-@media (max-width: 380px) {
-
-    .container {
-        padding: 15px 12px 25px;
-    }
-
-    .card {
-        padding: 24px 16px 20px;
-    }
-
-    .business-name {
-        font-size: 25px;
-    }
+  font-size: 12px;
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
 
-    <!-- YÜKLENİYOR -->
 
-    <div id="loading" class="loading">
-        İşletme bilgileri yükleniyor...
-    </div>
+  <div id="loading"
+       class="loading">
 
+    Yükleniyor...
 
-    <!-- HATA -->
+  </div>
 
-    <div id="error" class="error" style="display:none;">
 
-        <div class="error-icon">
-            🔎
-        </div>
+  <div id="content"
+       style="display:none;">
 
-        <h2>
-            İşletme bulunamadı
-        </h2>
 
-        <p id="errorText">
-            Bu bağlantıya ait işletme bilgisi bulunamadı.
-        </p>
+    <div class="profile">
 
-    </div>
 
+      <div id="logo"
+           class="logo">
 
-    <!-- İŞLETME -->
+        ✂️
 
-    <div id="businessCard"
-         class="card"
-         style="display:none;">
+      </div>
 
-        <!-- LOGO -->
 
-        <div class="logo" id="logo">
-            ✂️
-        </div>
+      <div id="name"
+           class="name">
 
+        İşletme
 
-        <!-- İSİM -->
+      </div>
 
-        <div
-            class="business-name"
-            id="businessName">
 
-            İşletme
+      <div id="category"
+           class="category">
 
-        </div>
+        -
 
+      </div>
 
-        <!-- KATEGORİ -->
 
-        <div
-            class="category"
-            id="category">
+      <div id="city"
+           class="city">
 
-            Kategori
+        -
 
-        </div>
+      </div>
 
-
-        <!-- ŞEHİR -->
-
-        <div
-            class="city"
-            id="city">
-
-            Şehir
-
-        </div>
-
-
-        <!-- BUTONLAR -->
-
-        <div class="buttons">
-
-
-            <!-- WHATSAPP -->
-
-            <a
-                id="whatsapp"
-                class="button whatsapp"
-                href="#"
-                target="_blank"
-                rel="noopener"
-                style="display:none;">
-
-                <span class="icon">
-                    💬
-                </span>
-
-                WhatsApp'tan İletişime Geç
-
-            </a>
-
-
-            <!-- INSTAGRAM -->
-
-            <a
-                id="instagram"
-                class="button"
-                href="#"
-                target="_blank"
-                rel="noopener"
-                style="display:none;">
-
-                <span class="icon">
-                    📸
-                </span>
-
-                Instagram
-
-            </a>
-
-
-            <!-- MAPS -->
-
-            <a
-                id="maps"
-                class="button"
-                href="#"
-                target="_blank"
-                rel="noopener"
-                style="display:none;">
-
-                <span class="icon">
-                    📍
-                </span>
-
-                Yol Tarifi Al
-
-            </a>
-
-
-            <!-- GOOGLE -->
-
-            <a
-                id="google"
-                class="button"
-                href="#"
-                target="_blank"
-                rel="noopener"
-                style="display:none;">
-
-                <span class="icon">
-                    ⭐
-                </span>
-
-                Google'da Değerlendir
-
-            </a>
-
-
-        </div>
-
-
-        <!-- İŞLETME BİLGİLERİ -->
-
-        <div class="info">
-
-            <div class="info-title">
-                İşletme Bilgileri
-            </div>
-
-
-            <div class="info-row">
-
-                <span>
-                    📍 Konum
-                </span>
-
-                <strong id="infoCity">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="info-row">
-
-                <span>
-                    🕒 Çalışma Saatleri
-                </span>
-
-                <strong id="hours">
-                    -
-                </strong>
-
-            </div>
-
-        </div>
 
     </div>
 
 
-    <!-- FOOTER -->
+    <div class="buttons">
 
-    <div class="footer">
 
-        <span>TAPGO</span>
-        &nbsp;•&nbsp;
-        DİJİTAL İŞLETME STANDI
+      <a id="whatsapp"
+         class="btn whatsapp"
+         target="_blank">
+
+        💬 WhatsApp
+
+      </a>
+
+
+      <a id="instagram"
+         class="btn"
+         target="_blank">
+
+        📷 Instagram
+
+      </a>
+
+
+      <a id="maps"
+         class="btn"
+         target="_blank">
+
+        📍 Konum
+
+      </a>
+
+
+      <a id="google"
+         class="btn"
+         target="_blank">
+
+        ⭐ Google'da Değerlendir
+
+      </a>
+
 
     </div>
+
+
+    <div class="info">
+
+
+      <div class="info-row">
+
+        <div class="info-title">
+
+          📍 Konum
+
+        </div>
+
+        <div id="cityInfo">
+
+          -
+
+        </div>
+
+      </div>
+
+
+      <div class="info-row">
+
+        <div class="info-title">
+
+          🕐 Çalışma Saatleri
+
+        </div>
+
+        <div id="hours">
+
+          -
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <footer>
+
+      TAPGO · Dijital İşletme Standı
+
+    </footer>
+
+
+  </div>
+
+
+  <div id="error"
+       class="error"
+       style="display:none;">
+
+    İşletme bulunamadı.
+
+  </div>
+
 
 </div>
+
 
 
 <script>
 
 
-/*
-===========================================
-TAPGO API
-===========================================
-*/
-
 const API_URL =
 "https://script.google.com/macros/s/AKfycbzYoGK5hM6WtaydubGiyJPhblkoGWwiVS5tEBWCHcurhklNytcKtkH57Ml6A5z89rLO6w/exec";
 
 
-/*
-===========================================
-URL'DEN ID AL
-===========================================
-*/
-
 const params =
-    new URLSearchParams(window.location.search);
+new URLSearchParams(
+  window.location.search
+);
+
 
 const id =
-    params.get("id");
+params.get("id");
 
-
-/*
-===========================================
-HTML ELEMANLARI
-===========================================
-*/
-
-const loading =
-    document.getElementById("loading");
-
-const errorBox =
-    document.getElementById("error");
-
-const errorText =
-    document.getElementById("errorText");
-
-const businessCard =
-    document.getElementById("businessCard");
-
-
-/*
-===========================================
-ID KONTROL
-===========================================
-*/
 
 if (!id) {
 
-    loading.style.display = "none";
+  document.getElementById(
+    "loading"
+  ).style.display = "none";
 
-    errorBox.style.display = "block";
 
-    errorText.innerText =
-        "Bu bağlantıda işletme ID'si bulunmuyor.";
-
-} else {
-
-    loadBusiness();
+  document.getElementById(
+    "error"
+  ).style.display = "block";
 
 }
 
 
-/*
-===========================================
-İŞLETMEYİ GETİR
-===========================================
-*/
+else {
 
-async function loadBusiness() {
+  fetch(
+    API_URL +
+    "?id=" +
+    encodeURIComponent(id)
+  )
 
-    try {
+  .then(
+    response => response.json()
+  )
 
-        const response =
-            await fetch(
-                API_URL +
-                "?id=" +
-                encodeURIComponent(id)
-            );
+  .then(
+    data => {
 
 
-        if (!response.ok) {
-
-            throw new Error(
-                "Sunucuya bağlanılamadı."
-            );
-
-        }
+      document.getElementById(
+        "loading"
+      ).style.display = "none";
 
 
-        const data =
-            await response.json();
+      if (!data.success) {
+
+        document.getElementById(
+          "error"
+        ).style.display = "block";
+
+        return;
+
+      }
 
 
-        console.log(
-            "TAPGO API:",
-            data
-        );
+      document.getElementById(
+        "content"
+      ).style.display = "block";
+
+
+      const customer =
+        data.customer;
+
+
+      document.getElementById(
+        "name"
+      ).textContent =
+        customer.name || "İşletme";
+
+
+      document.getElementById(
+        "category"
+      ).textContent =
+        customer.category || "";
+
+
+      document.getElementById(
+        "city"
+      ).textContent =
+        customer.city || "";
+
+
+      document.getElementById(
+        "cityInfo"
+      ).textContent =
+        customer.city || "-";
+
+
+      document.getElementById(
+        "hours"
+      ).textContent =
+        customer.hours || "-";
+
+
+      const logo =
+        document.getElementById("logo");
+
+
+      if (customer.logo) {
 
 
         if (
-            !data.success ||
-            !data.customer
+          String(customer.logo)
+            .startsWith("http")
         ) {
 
-            throw new Error(
-                data.error ||
-                "İşletme bulunamadı."
-            );
+          logo.innerHTML =
+            '<img src="' +
+            customer.logo +
+            '" alt="Logo">';
 
         }
 
+        else {
 
-        const customer =
-            data.customer;
-
-
-        /*
-        ===================================
-        TEMEL BİLGİLER
-        ===================================
-        */
-
-        document.getElementById(
-            "businessName"
-        ).innerText =
-            customer.name ||
-            "İşletme";
-
-
-        document.getElementById(
-            "category"
-        ).innerText =
-            customer.category ||
-            "";
-
-
-        document.getElementById(
-            "city"
-        ).innerText =
-            customer.city ||
-            "";
-
-
-        document.getElementById(
-            "infoCity"
-        ).innerText =
-            customer.city ||
-            "-";
-
-
-        document.getElementById(
-            "hours"
-        ).innerText =
-            customer.hours ||
-            "-";
-
-
-        /*
-        ===================================
-        LOGO
-        ===================================
-        */
-
-        const logo =
-            document.getElementById("logo");
-
-
-        if (customer.logo) {
-
-            const logoValue =
-                String(customer.logo);
-
-
-            if (
-                logoValue.startsWith("http://") ||
-                logoValue.startsWith("https://")
-            ) {
-
-                logo.innerHTML =
-                    "";
-
-
-                const image =
-                    document.createElement("img");
-
-
-                image.src =
-                    logoValue;
-
-
-                image.alt =
-                    customer.name ||
-                    "İşletme logosu";
-
-
-                logo.appendChild(
-                    image
-                );
-
-
-            } else {
-
-                logo.innerText =
-                    logoValue;
-
-            }
+          logo.textContent =
+            customer.logo;
 
         }
 
-
-        /*
-        ===================================
-        WHATSAPP
-        ===================================
-        */
-
-        setupButton(
-            "whatsapp",
-            customer.whatsapp
-        );
+      }
 
 
-        /*
-        ===================================
-        INSTAGRAM
-        ===================================
-        */
-
-        setupButton(
-            "instagram",
-            customer.instagram
-        );
+      setupButton(
+        "whatsapp",
+        customer.whatsapp
+      );
 
 
-        /*
-        ===================================
-        MAPS
-        ===================================
-        */
-
-        setupButton(
-            "maps",
-            customer.maps
-        );
+      setupButton(
+        "instagram",
+        customer.instagram
+      );
 
 
-        /*
-        ===================================
-        GOOGLE
-        ===================================
-        */
-
-        setupButton(
-            "google",
-            customer.google
-        );
+      setupButton(
+        "maps",
+        customer.maps
+      );
 
 
-        /*
-        ===================================
-        SAYFAYI GÖSTER
-        ===================================
-        */
+      setupButton(
+        "google",
+        customer.google
+      );
 
-        loading.style.display =
-            "none";
-
-        businessCard.style.display =
-            "block";
-
-
-        /*
-        ===================================
-        SAYFA BAŞLIĞI
-        ===================================
-        */
-
-        document.title =
-            (customer.name ||
-            "TAPGO") +
-            " | TAPGO";
-
-
-    } catch (error) {
-
-        console.error(
-            "TAPGO Hatası:",
-            error
-        );
-
-
-        loading.style.display =
-            "none";
-
-
-        errorBox.style.display =
-            "block";
-
-
-        errorText.innerText =
-            "İşletme bilgileri yüklenirken bir hata oluştu.";
 
     }
+
+  )
+
+  .catch(
+
+    error => {
+
+      console.error(error);
+
+
+      document.getElementById(
+        "loading"
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "error"
+      ).style.display =
+        "block";
+
+    }
+
+  );
 
 }
 
 
-/*
-===========================================
-BUTON AYARLA
-===========================================
-*/
 
 function setupButton(
-    elementId,
-    url
+  id,
+  url
 ) {
 
-    const button =
-        document.getElementById(
-            elementId
-        );
+  const button =
+    document.getElementById(id);
 
 
-    if (
-        url &&
-        String(url).trim() !== ""
-    ) {
+  if (!url) {
 
-        button.href =
-            String(url).trim();
+    button.style.display =
+      "none";
 
-        button.style.display =
-            "flex";
+    return;
 
-    }
+  }
+
+
+  button.href = url;
 
 }
 
 </script>
 
+
 </body>
+
 </html>
